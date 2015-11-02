@@ -60,7 +60,15 @@ public class PhotoWall extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.photo_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("选择图片");
+        getSupportActionBar().setTitle("选择图片(0)");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         getPhotos();
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(adapter);

@@ -1,29 +1,14 @@
 package com.demo.mummyding.photowall;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
-import android.support.v4.util.LruCache;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -95,6 +80,7 @@ public class ImageAdapter extends BaseAdapter implements AdapterView.OnItemClick
         }else if(imageBean.isChecked()){
             PhotoWall.checkedPhoto.add(imageBean);
         }
+        ((AppCompatActivity)mContext).getSupportActionBar().setTitle("选择图片("+PhotoWall.checkedPhoto.size()+")");
         this.notifyDataSetChanged();
     }
 

@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/done"
         android:title="完成"
-        android:showAsAction="always"
+        android:showAsAction="always|withText"
         ></item>
 </menu>
