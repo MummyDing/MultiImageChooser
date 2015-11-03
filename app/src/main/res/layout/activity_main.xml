@@ -3,13 +3,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/widget_header"/>
+    <Button
+        android:text="选择图片"
+        android:textSize="20sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:onClick="chooseImage"
         />
     <GridView
         android:id="@+id/image_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        />
 </LinearLayout>

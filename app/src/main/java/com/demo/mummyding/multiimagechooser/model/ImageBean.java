@@ -1,18 +1,33 @@
 package com.demo.mummyding.multiimagechooser.model;
 
+import android.net.Uri;
+
+import java.io.Serializable;
+
 /**
  * Created by mummyding on 15-11-3.
  */
-public class ImageBean {
-    private String imageUri;
+public class ImageBean implements Serializable{
+    private Uri imageUri;
     private boolean isChecked;
+    private int ID;
 
-    public String getImageUri() {
+    public int getID() {
+        return ID;
+    }
+
+    public ImageBean setID(int ID) {
+        this.ID = ID;
+        return this;
+    }
+
+    public Uri getImageUri() {
         return imageUri;
     }
 
-    public void setImageUri(String imageUri) {
+    public ImageBean setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
+        return this;
     }
 
     public boolean isChecked() {
