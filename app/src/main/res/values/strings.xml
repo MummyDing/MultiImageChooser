@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PhotoWall</string>
+    <string name="app_name">MultiImageChooser</string>
+    <string name="text_image_chooser">图片选择器</string>
 </resources>

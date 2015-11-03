@@ -1,4 +1,4 @@
-package com.demo.mummyding.photowall;
+package com.demo.mummyding.multiimagechooser;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
