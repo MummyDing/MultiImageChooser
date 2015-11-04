@@ -2,6 +2,7 @@ package com.demo.mummyding.multiimagechooser.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-3.
  */
-public class SelectImageAdapter extends BasicAdapter implements AdapterView.OnItemClickListener{
+public class SelectImageAdapter extends BasicAdapter {
     public List<ImageBean> checkedList = new ArrayList<>();
 
     public SelectImageAdapter(Context mContext) {
@@ -59,19 +60,19 @@ public class SelectImageAdapter extends BasicAdapter implements AdapterView.OnIt
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 imageBean.setIsChecked(isChecked);
-                if(checkedList.contains(imageBean)){
-                    if(imageBean.isChecked()==false) {
+                if (checkedList.contains(imageBean)) {
+                    if (imageBean.isChecked() == false) {
                         checkedList.remove(imageBean);
                     }
-                }else if(imageBean.isChecked()){
+                } else if (imageBean.isChecked()) {
                     checkedList.add(imageBean);
                 }
-                ((AppCompatActivity)mContext).getSupportActionBar().setTitle("选择图片("+checkedList.size()+")");
-             }
+                ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
+            }
         });
         viewHolder.checkBox.setChecked(imageBean.isChecked());
         viewHolder.image.setLayoutParams(frameParams);
-        viewHolder.image.setImageURI(imageBean.getImageUri());
+        viewHolder.image.setImageURI(Uri.parse(imageBean.getImageUri()));
         return convertView;
     }
 

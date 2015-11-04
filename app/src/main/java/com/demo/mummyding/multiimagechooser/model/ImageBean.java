@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by mummyding on 15-11-3.
  */
 public class ImageBean implements Serializable{
-    private Uri imageUri;
+    private String imageUri;
     private boolean isChecked;
     private int ID;
 
@@ -21,11 +21,11 @@ public class ImageBean implements Serializable{
         return this;
     }
 
-    public Uri getImageUri() {
+    public String getImageUri() {
         return imageUri;
     }
 
-    public ImageBean setImageUri(Uri imageUri) {
+    public ImageBean setImageUri(String imageUri) {
         this.imageUri = imageUri;
         return this;
     }

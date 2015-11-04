@@ -8,10 +8,13 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
 import com.demo.mummyding.multiimagechooser.R;
 import com.demo.mummyding.multiimagechooser.Utils.ScreenUti;
@@ -52,7 +55,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         //image.setImageDrawable(getBitmapFromUri(Uri.parse(intent.getStringExtra("imageUri"))));
         image.setImageBitmap(getBitmapFromUri(Uri.parse(intent.getStringExtra("imageUri"))));
-       // image.setLayoutParams(layoutParams);
+        image.setLayoutParams(layoutParams);
        // image.setImageURI(Uri.parse(intent.getStringExtra("imageUri")));
     }
     private Bitmap getBitmapFromUri(Uri uri)
@@ -60,8 +63,6 @@ public class ImageDetailsActivity extends AppCompatActivity {
         Bitmap resizedBitmap = null;
         BitmapFactory.Options outBitmap = new BitmapFactory.Options();
         outBitmap.inJustDecodeBounds = false; // the decoder will return a bitmap
-
-
         try {
             BitmapFactory.Options outDimens = getBitmapDimensions(uri);
             outBitmap.inSampleSize = outDimens.outWidth/ScreenUti.getScreenWidth();
@@ -91,5 +92,8 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
         return outDimens;
     }
+
+
+
 
 }

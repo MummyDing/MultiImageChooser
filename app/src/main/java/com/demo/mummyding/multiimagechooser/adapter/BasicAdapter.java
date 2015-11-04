@@ -2,6 +2,7 @@ package com.demo.mummyding.multiimagechooser.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-3.
  */
-public abstract class BasicAdapter extends BaseAdapter{
+public abstract class BasicAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
     protected List<ImageBean> mList;
     protected Context mContext;
     protected static int imageWidth;
