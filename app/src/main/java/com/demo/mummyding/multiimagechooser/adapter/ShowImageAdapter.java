@@ -19,8 +19,5 @@ public class ShowImageAdapter extends BasicAdapter {
         return null;
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

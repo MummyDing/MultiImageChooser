@@ -24,4 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.facebook.fresco:fresco:0.6.0+'
+    compile 'com.diegocarloslima:byakugallery:0.1.+@aar'
+    compile 'com.linwoain.library:library:1.0'
 }

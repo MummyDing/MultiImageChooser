@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-3.
  */
-public abstract class BasicAdapter extends BaseAdapter implements View.OnClickListener{
+public abstract class BasicAdapter extends BaseAdapter{
     protected List<ImageBean> mList;
     protected Context mContext;
     protected static int imageWidth;
