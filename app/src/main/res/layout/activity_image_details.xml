@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
     <include layout="@layout/widget_header"/>
-  <!--  <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/source_img"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        fresco:scaleType="fitCenter"
-        fresco:progressBarImage="@color/colorPrimary"
-        />-->
-   <!-- <com.diegocarloslima.byakugallery.lib.TouchImageView
-        android:id="@+id/source_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
-    <com.polites.android.GestureImageView
-        xmlns:gesture-image="http://schemas.polites.com/android"
-        android:id="@+id/source_img"
-        android:scaleType="centerInside"
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        gesture-image:min-scale="0.1"
-        gesture-image:max-scale="10.0"
-        gesture-image:strict="false"
-        />
-</RelativeLayout>
+        android:layout_height="match_parent">
+        <com.polites.android.GestureImageView
+            xmlns:gesture-image="http://schemas.polites.com/android"
+            android:id="@+id/source_img"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            gesture-image:min-scale="0.1"
+            gesture-image:max-scale="10.0"
+            gesture-image:strict="false"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.demo.mummyding.multiimagechooser.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,10 @@ import com.demo.mummyding.multiimagechooser.Utils.ScreenUti;
 import com.diegocarloslima.byakugallery.lib.TouchImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.polites.android.GestureImageView;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ImageDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -52,17 +57,39 @@ public class ImageDetailsActivity extends AppCompatActivity {
     }
     private Bitmap getBitmapFromUri(Uri uri)
     {
-        try
-        {
-            // 读取uri所在的图片
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-            return bitmap;
-        }
-        catch (Exception e)
-        {
+        Bitmap resizedBitmap = null;
+        BitmapFactory.Options outBitmap = new BitmapFactory.Options();
+        outBitmap.inJustDecodeBounds = false; // the decoder will return a bitmap
 
+
+        try {
+            BitmapFactory.Options outDimens = getBitmapDimensions(uri);
+            outBitmap.inSampleSize = outDimens.outWidth/ScreenUti.getScreenWidth();
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        InputStream is = null;
+        try {
+            is = getContentResolver().openInputStream(uri);
+            resizedBitmap = BitmapFactory.decodeStream(is, null, outBitmap);
+            is.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resizedBitmap;
     }
+    private BitmapFactory.Options getBitmapDimensions(Uri uri) throws FileNotFoundException, IOException {
+        BitmapFactory.Options outDimens = new BitmapFactory.Options();
+        outDimens.inJustDecodeBounds = true; // the decoder will return null (no bitmap)
+
+        InputStream is= getContentResolver().openInputStream(uri);
+        // if Options requested only the size will be returned
+        BitmapFactory.decodeStream(is, null, outDimens);
+        is.close();
+
+        return outDimens;
+    }
+
 }
