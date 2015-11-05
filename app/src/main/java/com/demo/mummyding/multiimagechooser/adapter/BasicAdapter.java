@@ -1,13 +1,12 @@
 package com.demo.mummyding.multiimagechooser.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.demo.mummyding.multiimagechooser.Utils.ScreenUti;
+import com.demo.mummyding.multiimagechooser.Utils.ScreenUtil;
 import com.demo.mummyding.multiimagechooser.model.ImageBean;
 
 import java.util.List;
@@ -15,14 +14,14 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-3.
  */
-public abstract class BasicAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
+public abstract class BasicAdapter extends BaseAdapter{
     protected List<ImageBean> mList;
     protected Context mContext;
     protected static int imageWidth;
     protected static LinearLayout.LayoutParams linearParams;
     protected static FrameLayout.LayoutParams frameParams;
     static {
-        imageWidth = ScreenUti.getScreenWidth()/3;
+        imageWidth = ScreenUtil.getScreenWidth()/3;
         linearParams = new LinearLayout.LayoutParams(imageWidth,imageWidth);
         frameParams = new FrameLayout.LayoutParams(imageWidth,imageWidth);
     }

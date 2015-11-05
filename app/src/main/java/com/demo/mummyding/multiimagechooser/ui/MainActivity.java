@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.demo.mummyding.multiimagechooser.R;
-import com.demo.mummyding.multiimagechooser.Utils.ScreenUti;
+import com.demo.mummyding.multiimagechooser.Utils.ScreenUtil;
 import com.demo.mummyding.multiimagechooser.adapter.ShowImageAdapter;
 import com.demo.mummyding.multiimagechooser.model.ImageBean;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
+         * initialized before setContentView
+         * Fresco is a powerful image-loader library
+         * ScreenUtil is used for getting screen size
+         */
         Fresco.initialize(this);
-        ScreenUti.init(this);
+        ScreenUtil.init(this);
         setContentView(R.layout.activity_main);
         initView();
     }
@@ -42,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = (ShowImageAdapter) new ShowImageAdapter(this).setList(selectedImage);
         gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(adapter);
     }
 
+    /*
+     * this function is binding to "Image Choose" Button
+     */
     public void chooseImage(View view) {
         Intent intent = new Intent(MainActivity.this,PhotoWallActivity.class);
-        intent.putExtra("checkedImage", (Serializable) adapter.getList());
+        intent.putExtra(getString(R.string.id_selected_img), (Serializable) adapter.getList());
         startActivityForResult(intent,PICK_IMG);
     }
 
@@ -57,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case PICK_IMG:
                 if(data != null){
-                   int num = ((List<ImageBean>) data.getSerializableExtra("checkedImage")).size();
-                    adapter.setList((List<ImageBean>) data.getSerializableExtra("checkedImage"))
+                    adapter.setList((List<ImageBean>) data.getSerializableExtra(getString(R.string.id_selected_img)))
                            .notifyDataSetChanged();
                 }
                 break;

@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-3.
  */
-public class SelectImageAdapter extends BasicAdapter {
+public class SelectImageAdapter extends BasicAdapter implements AdapterView.OnItemClickListener{
     public List<ImageBean> checkedList = new ArrayList<>();
 
     public SelectImageAdapter(Context mContext) {
@@ -57,10 +57,11 @@ public class SelectImageAdapter extends BasicAdapter {
                 } else if (imageBean.isChecked()) {
                     checkedList.add(imageBean);
                 }
-                ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
+                ((AppCompatActivity) mContext).getSupportActionBar().setTitle(mContext.getString(R.string.text_selected_img)+"(" + checkedList.size() + ")");
             }
         });
-        ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
+        ((AppCompatActivity) mContext).getSupportActionBar().setTitle(mContext.getString(R.string.text_selected_img)+"(" + checkedList.size() + ")");
+
         viewHolder.checkBox.setChecked(imageBean.isChecked());
         viewHolder.image.setLayoutParams(frameParams);
         viewHolder.image.setImageURI(Uri.parse(imageBean.getImageUri()));
@@ -70,7 +71,7 @@ public class SelectImageAdapter extends BasicAdapter {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(mContext, ImageDetailsActivity.class);
-        intent.putExtra("imageUri",((ImageBean)getItem(position)).getImageUri().toString());
+        intent.putExtra(mContext.getString(R.string.id_image_uri),((ImageBean)getItem(position)).getImageUri().toString());
         mContext.startActivity(intent);
     }
 

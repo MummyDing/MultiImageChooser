@@ -8,7 +8,7 @@ import android.view.Display;
 /**
  * Created by mummyding on 15-11-3.
  */
-public class ScreenUti {
+public class ScreenUtil {
     private static int ScreenWidth = 0;
     private static int ScreenHeight = 0;
     private static Context mContext = null;

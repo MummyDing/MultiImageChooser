@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MultiImageChooser</string>
-    <string name="text_image_chooser">图片选择器</string>
+    <string name="text_image_chooser">ImageChooser</string>
+    <string name="text_selected_img">ChooseImage</string>
+    <string name="id_selected_img">selectedImage</string>
+    <string name="id_image_uri">imageUri</string>
+    <string name="text_menu_done">Done</string>
+    <string name="text_image">Image</string>
 </resources>

@@ -6,17 +6,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CursorAdapter;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.demo.mummyding.multiimagechooser.R;
 import com.demo.mummyding.multiimagechooser.adapter.SelectImageAdapter;
@@ -48,7 +44,6 @@ public class PhotoWallActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         gridView = (GridView) findViewById(R.id.image_grid);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("选择图片(0)");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +52,19 @@ public class PhotoWallActivity extends AppCompatActivity {
             }
         });
         getData();
+        getSupportActionBar().setTitle(getString(R.string.text_selected_img) + "(" + adapter.checkedList.size() + ")");
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(adapter);
     }
+    /*
+     *  Get images from System Storage by Content Provider
+     */
     private void getData(){
         adapter = (SelectImageAdapter) new SelectImageAdapter(this).setList(imageList);
+
         Intent intent = getIntent();
-        adapter.checkedList = (List<ImageBean>) intent.getSerializableExtra("checkedImage");
+        adapter.checkedList = (List<ImageBean>) intent.getSerializableExtra(getString(R.string.id_selected_img));
+
         final ContentResolver cr = getContentResolver();
         final String selection = "(("+MIME_TYPE+"=?)or("+MIME_TYPE+"=?))";
         final String [] selectionArgs = new String[]{"image/jpeg","image/png"};
@@ -85,11 +86,13 @@ public class PhotoWallActivity extends AppCompatActivity {
                     imageList.set(imageBean.getID(),imageBean);
                     handler.sendEmptyMessage(0);
                 }
-
             }
         }).start();
 
     }
+    /*
+     * update UI
+     */
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -103,9 +106,12 @@ public class PhotoWallActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
+     * this function is binding to Menu "Done"
+     */
     public void onDone(MenuItem item) {
         Intent intent = new Intent();
-        intent.putExtra("checkedImage", (Serializable) adapter.checkedList);
+        intent.putExtra(getString(R.string.id_selected_img), (Serializable) adapter.checkedList);
         setResult(MainActivity.PICK_IMG, intent);
         finish();
     }
@@ -113,7 +119,7 @@ public class PhotoWallActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("checkedImage", (Serializable) originalImageList);
+        intent.putExtra(getString(R.string.id_selected_img), (Serializable) originalImageList);
         setResult(MainActivity.PICK_IMG, intent);
         super.onBackPressed();
     }

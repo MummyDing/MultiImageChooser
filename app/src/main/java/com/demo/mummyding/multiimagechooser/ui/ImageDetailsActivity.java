@@ -4,22 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.Toast;
 
 import com.demo.mummyding.multiimagechooser.R;
-import com.demo.mummyding.multiimagechooser.Utils.ScreenUti;
-import com.diegocarloslima.byakugallery.lib.TouchImageView;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.demo.mummyding.multiimagechooser.Utils.ScreenUtil;
 import com.polites.android.GestureImageView;
 
 import java.io.FileNotFoundException;
@@ -28,36 +20,35 @@ import java.io.InputStream;
 
 public class ImageDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
-   // private SimpleDraweeView image;
     private LayoutParams layoutParams = null;
-    //private TouchImageView image;
     private GestureImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_details);
         initData();
-
     }
     private void initData(){
         image = (GestureImageView) findViewById(R.id.source_img);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("图片");
+        getSupportActionBar().setTitle(R.string.text_image);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        layoutParams = new LayoutParams(ScreenUti.getScreenWidth(),ScreenUti.getScreenHeight()-toolbar.getHeight());
+        layoutParams = new LayoutParams(ScreenUtil.getScreenWidth(), ScreenUtil.getScreenHeight()-toolbar.getHeight());
+
         Intent intent = getIntent();
-        //image.setImageDrawable(getBitmapFromUri(Uri.parse(intent.getStringExtra("imageUri"))));
-        image.setImageBitmap(getBitmapFromUri(Uri.parse(intent.getStringExtra("imageUri"))));
+        image.setImageBitmap(getBitmapFromUri(Uri.parse(intent.getStringExtra(getString(R.string.id_image_uri)))));
         image.setLayoutParams(layoutParams);
-       // image.setImageURI(Uri.parse(intent.getStringExtra("imageUri")));
     }
+    /*
+     * Get  thumbnails from Uri
+     */
     private Bitmap getBitmapFromUri(Uri uri)
     {
         Bitmap resizedBitmap = null;
@@ -65,7 +56,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
         outBitmap.inJustDecodeBounds = false; // the decoder will return a bitmap
         try {
             BitmapFactory.Options outDimens = getBitmapDimensions(uri);
-            outBitmap.inSampleSize = outDimens.outWidth/ScreenUti.getScreenWidth();
+            outBitmap.inSampleSize = outDimens.outWidth/ ScreenUtil.getScreenWidth();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,10 +72,12 @@ public class ImageDetailsActivity extends AppCompatActivity {
         }
         return resizedBitmap;
     }
+    /*
+     * Get size of the bitmap
+     */
     private BitmapFactory.Options getBitmapDimensions(Uri uri) throws FileNotFoundException, IOException {
         BitmapFactory.Options outDimens = new BitmapFactory.Options();
         outDimens.inJustDecodeBounds = true; // the decoder will return null (no bitmap)
-
         InputStream is= getContentResolver().openInputStream(uri);
         // if Options requested only the size will be returned
         BitmapFactory.decodeStream(is, null, outDimens);
@@ -92,8 +85,4 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
         return outDimens;
     }
-
-
-
-
 }
