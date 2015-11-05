@@ -39,7 +39,7 @@ public class SelectImageAdapter extends BasicAdapter {
 
         ViewHolder viewHolder = new ViewHolder();
         final ImageBean imageBean = (ImageBean) getItem(position);
-        Log.d("giiii", imageBean.getID() + "");
+       // Log.d("giiii", imageBean.getID() + "");
         if(convertView == null){
             convertView = View.inflate(mContext, R.layout.item_choose_image,null);
             viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.image);
@@ -67,9 +67,10 @@ public class SelectImageAdapter extends BasicAdapter {
                 } else if (imageBean.isChecked()) {
                     checkedList.add(imageBean);
                 }
-                ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
-            }
+              }
         });
+        ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
+
         viewHolder.checkBox.setChecked(imageBean.isChecked());
         viewHolder.image.setLayoutParams(frameParams);
         viewHolder.image.setImageURI(Uri.parse(imageBean.getImageUri()));
@@ -78,7 +79,7 @@ public class SelectImageAdapter extends BasicAdapter {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    Log.d("onitem",position+"");
+   // Log.d("onitem",position+"");
         Intent intent = new Intent(mContext, ImageDetailsActivity.class);
         intent.putExtra("imageUri",((ImageBean)getItem(position)).getImageUri().toString());
         mContext.startActivity(intent);

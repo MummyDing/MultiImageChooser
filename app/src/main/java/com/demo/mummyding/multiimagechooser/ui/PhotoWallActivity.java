@@ -54,20 +54,22 @@ public class PhotoWallActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         getData();
-        adapter = (SelectImageAdapter) new SelectImageAdapter(this).setList(imageList);
+        /*.setList(imageList);*/
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(adapter);
 
-        Intent intent = getIntent();
-        adapter.checkedList = (List<ImageBean>) intent.getSerializableExtra("checkedImage");
+
+
         Log.d("check",adapter.checkedList.size()+"");
-        for(ImageBean imageBean :adapter.checkedList){
-            originalImageList.add(imageBean);
-            //imageList.get(imageBean.getID()).setIsChecked(imageBean.isChecked());
-        }
+        Log.d("checksize",imageList.size()+"");
+
     }
     private void getData(){
+        adapter = (SelectImageAdapter) new SelectImageAdapter(this).setList(imageList);
+        Intent intent = getIntent();
+        adapter.checkedList = (List<ImageBean>) intent.getSerializableExtra("checkedImage");
         final ContentResolver cr = getContentResolver();
         final String selection = "(("+MIME_TYPE+"=?)or("+MIME_TYPE+"=?))";
         final String [] selectionArgs = new String[]{"image/jpeg","image/png"};
@@ -83,6 +85,13 @@ public class PhotoWallActivity extends AppCompatActivity {
                             Uri.fromFile(new File(path)).toString()).setID(imageList.size());
                     imageList.add(imageBean);
                 }
+                for(ImageBean imageBean :adapter.checkedList){
+                    originalImageList.add(imageBean);
+                    Log.d("ccccccccc", imageBean.isChecked() + "");
+                    imageList.set(imageBean.getID(),imageBean);
+                }
+                //adapter.notifyDataSetChanged();
+
             }
         }).start();
 
