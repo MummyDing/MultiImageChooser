@@ -35,7 +35,7 @@ public class SelectImageAdapter extends BasicAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-       // Log.d("giiii",position+"");
+        Log.d("viewid",position+" "+getCount()+" "+checkedList.size());
 
         ViewHolder viewHolder = new ViewHolder();
         final ImageBean imageBean = (ImageBean) getItem(position);
@@ -46,9 +46,9 @@ public class SelectImageAdapter extends BasicAdapter {
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
            // viewHolder.image.setOnClickListener(this);
             viewHolder.checkBox.setChecked(imageBean.isChecked());
-
+            Log.d("ck", viewHolder.checkBox.isChecked() + "");
             //viewHolder.checkBox.setChecked(imageBean.isChecked());
-            viewHolder.checkBox.setTag(position);
+           // viewHolder.checkBox.setTag(position);
 //            viewHolder.checkBox.setTag(convertView.getId());
           //  viewHolder.checkBox.setOnCheckedChangeListener(this);
             //viewHolder.checkBox.setId(position);

@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,7 +77,7 @@ public class PhotoWallActivity extends AppCompatActivity {
         final String [] selectionArgs = new String[]{"image/jpeg","image/png"};
         new Thread(new Runnable() {
             @Override
-            public void run() {
+            public  void run() {
                 Cursor cursor = cr.query(EXTERNAL_CONTENT_URI,null,
                         selection,selectionArgs,null);
                 while (cursor!=null && cursor.moveToNext()){
@@ -87,15 +89,21 @@ public class PhotoWallActivity extends AppCompatActivity {
                 }
                 for(ImageBean imageBean :adapter.checkedList){
                     originalImageList.add(imageBean);
-                    Log.d("ccccccccc", imageBean.isChecked() + "");
                     imageList.set(imageBean.getID(),imageBean);
+                    handler.sendEmptyMessage(0);
                 }
-                //adapter.notifyDataSetChanged();
 
             }
         }).start();
 
     }
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+    });
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_select_done, menu);
