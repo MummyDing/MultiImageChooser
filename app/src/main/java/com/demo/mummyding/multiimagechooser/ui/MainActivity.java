@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             case PICK_IMG:
                 if(data != null){
                    int num = ((List<ImageBean>) data.getSerializableExtra("checkedImage")).size();
-                    Toast.makeText(MainActivity.this,num+"",Toast.LENGTH_SHORT).show();
                     adapter.setList((List<ImageBean>) data.getSerializableExtra("checkedImage"))
                            .notifyDataSetChanged();
                 }

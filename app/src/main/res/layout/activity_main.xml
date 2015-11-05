@@ -7,14 +7,16 @@
     <Button
         android:text="选择图片"
         android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:textColor="@color/colorText"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_margin="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
         android:onClick="chooseImage"
         />
     <GridView

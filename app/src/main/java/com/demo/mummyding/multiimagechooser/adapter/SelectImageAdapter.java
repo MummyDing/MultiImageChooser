@@ -35,23 +35,13 @@ public class SelectImageAdapter extends BasicAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Log.d("viewid",position+" "+getCount()+" "+checkedList.size());
-
         ViewHolder viewHolder = new ViewHolder();
         final ImageBean imageBean = (ImageBean) getItem(position);
-       // Log.d("giiii", imageBean.getID() + "");
         if(convertView == null){
             convertView = View.inflate(mContext, R.layout.item_choose_image,null);
             viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.image);
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
-           // viewHolder.image.setOnClickListener(this);
             viewHolder.checkBox.setChecked(imageBean.isChecked());
-            Log.d("ck", viewHolder.checkBox.isChecked() + "");
-            //viewHolder.checkBox.setChecked(imageBean.isChecked());
-           // viewHolder.checkBox.setTag(position);
-//            viewHolder.checkBox.setTag(convertView.getId());
-          //  viewHolder.checkBox.setOnCheckedChangeListener(this);
-            //viewHolder.checkBox.setId(position);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -70,7 +60,7 @@ public class SelectImageAdapter extends BasicAdapter {
                 ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
             }
         });
-
+        ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
         viewHolder.checkBox.setChecked(imageBean.isChecked());
         viewHolder.image.setLayoutParams(frameParams);
         viewHolder.image.setImageURI(Uri.parse(imageBean.getImageUri()));
@@ -79,7 +69,6 @@ public class SelectImageAdapter extends BasicAdapter {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-   // Log.d("onitem",position+"");
         Intent intent = new Intent(mContext, ImageDetailsActivity.class);
         intent.putExtra("imageUri",((ImageBean)getItem(position)).getImageUri().toString());
         mContext.startActivity(intent);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.demo.mummyding.multiimagechooser.R;
@@ -24,13 +25,13 @@ public class ShowImageAdapter extends BasicAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ImageBean imageBean= (ImageBean) getItem(position);
         ViewHolder viewHolder = new ViewHolder();
         if(convertView == null){
             convertView = View.inflate(mContext,R.layout.item_show_image,null);
             viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.image);
-            viewHolder.close_btn = (ImageButton) convertView.findViewById(R.id.close_btn);
+            viewHolder.close_btn = (ImageView) convertView.findViewById(R.id.close_btn);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -40,7 +41,8 @@ public class ShowImageAdapter extends BasicAdapter {
         viewHolder.close_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
+                getList().remove(position);
+                updateUI();
             }
         });
         viewHolder.image.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +60,6 @@ public class ShowImageAdapter extends BasicAdapter {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(mContext,"itemo",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(mContext, ImageDetailsActivity.class);
         intent.putExtra("imageUri",((ImageBean)getItem(position)).getImageUri().toString());
         mContext.startActivity(intent);
@@ -66,7 +67,7 @@ public class ShowImageAdapter extends BasicAdapter {
 
     class ViewHolder{
         SimpleDraweeView image;
-        ImageButton close_btn;
+        ImageView close_btn;
     }
 
 

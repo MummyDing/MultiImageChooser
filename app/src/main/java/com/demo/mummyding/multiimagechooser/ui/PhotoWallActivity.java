@@ -56,17 +56,9 @@ public class PhotoWallActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         getData();
-        /*.setList(imageList);*/
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(adapter);
-
-
-
-        Log.d("check",adapter.checkedList.size()+"");
-        Log.d("checksize",imageList.size()+"");
-
     }
     private void getData(){
         adapter = (SelectImageAdapter) new SelectImageAdapter(this).setList(imageList);
@@ -88,6 +80,7 @@ public class PhotoWallActivity extends AppCompatActivity {
                     imageList.add(imageBean);
                 }
                 for(ImageBean imageBean :adapter.checkedList){
+                    imageBean.setIsChecked(true);
                     originalImageList.add(imageBean);
                     imageList.set(imageBean.getID(),imageBean);
                     handler.sendEmptyMessage(0);
@@ -111,7 +104,6 @@ public class PhotoWallActivity extends AppCompatActivity {
     }
 
     public void onDone(MenuItem item) {
-        Toast.makeText(PhotoWallActivity.this,"ok",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.putExtra("checkedImage", (Serializable) adapter.checkedList);
         setResult(MainActivity.PICK_IMG, intent);
@@ -120,7 +112,6 @@ public class PhotoWallActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d("origin",originalImageList.size()+"");
         Intent intent = new Intent();
         intent.putExtra("checkedImage", (Serializable) originalImageList);
         setResult(MainActivity.PICK_IMG, intent);
