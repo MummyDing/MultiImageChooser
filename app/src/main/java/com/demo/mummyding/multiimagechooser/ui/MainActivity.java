@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.image_grid);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_image_chooser);
-        gridView.setOnItemClickListener(adapter);
+
         adapter = (ShowImageAdapter) new ShowImageAdapter(this).setList(selectedImage);
         gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(adapter);
     }
 
     public void chooseImage(View view) {

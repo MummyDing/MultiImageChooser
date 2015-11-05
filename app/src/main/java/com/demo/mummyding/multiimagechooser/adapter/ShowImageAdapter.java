@@ -1,6 +1,7 @@
 package com.demo.mummyding.multiimagechooser.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.demo.mummyding.multiimagechooser.R;
 import com.demo.mummyding.multiimagechooser.adapter.BasicAdapter;
 import com.demo.mummyding.multiimagechooser.model.ImageBean;
+import com.demo.mummyding.multiimagechooser.ui.ImageDetailsActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
@@ -23,7 +25,7 @@ public class ShowImageAdapter extends BasicAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageBean imageBean= (ImageBean) getItem(position);
+        final ImageBean imageBean= (ImageBean) getItem(position);
         ViewHolder viewHolder = new ViewHolder();
         if(convertView == null){
             convertView = View.inflate(mContext,R.layout.item_show_image,null);
@@ -38,7 +40,15 @@ public class ShowImageAdapter extends BasicAdapter {
         viewHolder.close_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"test",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
+            }
+        });
+        viewHolder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ImageDetailsActivity.class);
+                intent.putExtra("imageUri", imageBean.getImageUri().toString());
+                mContext.startActivity(intent);
             }
         });
 
@@ -49,6 +59,9 @@ public class ShowImageAdapter extends BasicAdapter {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(mContext,"itemo",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(mContext, ImageDetailsActivity.class);
+        intent.putExtra("imageUri",((ImageBean)getItem(position)).getImageUri().toString());
+        mContext.startActivity(intent);
     }
 
     class ViewHolder{

@@ -67,9 +67,9 @@ public class SelectImageAdapter extends BasicAdapter {
                 } else if (imageBean.isChecked()) {
                     checkedList.add(imageBean);
                 }
-              }
+                ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
+            }
         });
-        ((AppCompatActivity) mContext).getSupportActionBar().setTitle("选择图片(" + checkedList.size() + ")");
 
         viewHolder.checkBox.setChecked(imageBean.isChecked());
         viewHolder.image.setLayoutParams(frameParams);
