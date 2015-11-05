@@ -6,9 +6,10 @@
 --------
 
 - ScreenShot
-	![alt text](http://img.blog.csdn.net/20151105172019886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)   
-	![alt text](http://img.blog.csdn.net/20151105171943360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)   
-	![alt text](http://img.blog.csdn.net/20151105210747497?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)   
+<img src="http://img.blog.csdn.net/20151105172019886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" width="230" height="400"/> 
+<img src="http://img.blog.csdn.net/20151105171943360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" width="230" height="400"/>
+ <img src="http://img.blog.csdn.net/20151105210747497?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" width="230" height="400"/> <br>
+
 - Locale
   - Chinese
   - English
