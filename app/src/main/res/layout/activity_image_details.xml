@@ -10,17 +10,11 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
         >
-        <com.polites.android.GestureImageView
-            xmlns:gesture-image="http://schemas.polites.com/android"
+        <com.bm.library.PhotoView
             android:id="@+id/source_img"
-            android:scaleType="centerInside"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            gesture-image:min-scale="0.1"
-            gesture-image:max-scale="10.0"
-            gesture-image:strict="false"
-            android:layout_centerInParent="true"
-            />
+            android:layout_height="match_parent"
+            android:scaleType="centerInside" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.bm.library.PhotoView;
 import com.demo.mummyding.multiimagechooser.R;
 import com.demo.mummyding.multiimagechooser.Utils.ScreenUtil;
 import com.polites.android.GestureImageView;
@@ -21,7 +22,7 @@ import java.io.InputStream;
 public class ImageDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private LayoutParams layoutParams = null;
-    private GestureImageView image;
+    private PhotoView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,8 @@ public class ImageDetailsActivity extends AppCompatActivity {
         initData();
     }
     private void initData(){
-        image = (GestureImageView) findViewById(R.id.source_img);
+        image = (PhotoView) findViewById(R.id.source_img);
+        image.enable();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
