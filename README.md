@@ -15,4 +15,4 @@
   - English
 - Third Party Library
   - [Fresco](https://github.com/facebook/fresco/)
-  - [Gesture-ImageView](https://github.com/jasonpolites/gesture-imageview)
+  - [PhotoView](https://github.com/bm-x/PhotoView)
